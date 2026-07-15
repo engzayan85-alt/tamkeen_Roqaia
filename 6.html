@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنجازات تمكين إقليم غزة</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #1E3A8A;
+            --primary-light: #3B5FBF;
+            --accent: #10B981;
+            --accent-light: #34D399;
+            --pink: #ec4899;
+            --pink-light: #f9a8d4;
+            --bg-blue: #e0f2fe;
+            --white: #ffffff;
+            --text-dark: #0F172A;
+            --text-gray: #475569;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
+            --radius: 20px;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-blue);
+            min-height: 100vh;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        /* ===== الهيدر ===== */
+        header {
+            text-align: center;
+            margin-bottom: 18px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        header .sub-title {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 4px;
+        }
+
+        /* ===== الحاوية الرئيسية ===== */
+        .main-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            transition: var(--transition);
+        }
+
+        /* ===== اللوحة العلوية (تبدأ كبيرة) ===== */
+        .nav-panel {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 38px 42px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border-top: 6px solid var(--primary);
+            position: relative;
+        }
+
+        /* حالة التصغير */
+        .nav-panel.shrink {
+            padding: 16px 24px;
+            border-top: 4px solid var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-panel.shrink .axes-container {
+            margin-bottom: 10px;
+        }
+
+        .nav-panel.shrink .axis-btn {
+            padding: 8px 14px;
+            font-size: 0.85rem;
+        }
+
+        .nav-panel.shrink .sub-menu {
+            padding-top: 10px;
+            gap: 6px;
+        }
+
+        .nav-panel.shrink .item-btn {
+            padding: 5px 12px;
+            font-size: 0.78rem;
+        }
+
+        /* ===== أزرار المحاور ===== */
+        .axes-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+            transition: var(--transition);
+        }
+
+        .axis-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 14px 24px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(30, 58, 138, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .axis-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--pink), var(--primary-light));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 14px;
+        }
+
+        .axis-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
+        }
+
+        .axis-btn:hover::before {
+            opacity: 0.1;
+        }
+
+        .axis-btn.active {
+            background: var(--pink);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.35);
+        }
+
+        .axis-btn.active::before {
+            opacity: 0;
+        }
+
+        .axis-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .axis-btn .icon {
+            display: inline-block;
+            margin-left: 6px;
+        }
+
+        /* ===== البنود الفرعية ===== */
+        .sub-menu {
+            display: none;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding-top: 18px;
+            border-top: 2px solid #f1f5f9;
+            animation: fadeIn 0.3s ease;
+            transition: var(--transition);
+        }
+
+        .item-btn {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.25s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .item-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .item-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.25);
+        }
+
+        /* ===== قسم المحتوى (يظهر بالأسفل) ===== */
+        .content-section {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background: var(--white);
+            padding: 24px 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            animation: slideUp 0.5s ease;
+            border-right: 6px solid var(--pink);
+        }
+
+        /* ===== النص ===== */
+        .text-area {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+            padding: 8px 4px;
+            text-align: justify;
+        }
+
+        .text-area .highlight-primary {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .text-area .highlight-accent {
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .text-area .stat-num {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0 12px;
+            border-radius: 10px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            min-width: 30px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .text-area .stat-num:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+        }
+
+        .source-ref {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 3px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        /* ===== السلايدر ===== */
+        .slider-box {
+            position: relative;
+            width: 100%;
+height: 500px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #1e293b;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            will-change: opacity;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        /* ===== مؤشرات السلايدر ===== */
+        .slider-dots {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active-dot {
+            background: var(--white);
+            transform: scale(1.3);
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+        }
+
+        /* ===== حالات العرض ===== */
+        .visible-flex {
+            display: flex !important;
+        }
+        .visible-grid {
+            display: grid !important;
+        }
+
+        /* ===== الحركات ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== استجابة للشاشات ===== */
+        @media (max-width: 850px) {
+            .content-section {
+                grid-template-columns: 1fr;
+                padding: 18px 16px;
+            }
+
+            .slider-box {
+                height: 200px;
+            }
+
+            .nav-panel {
+                padding: 24px 18px;
+            }
+
+            .nav-panel.shrink {
+                padding: 12px 14px;
+            }
+
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .axis-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .nav-panel.shrink .axis-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+
+            .item-btn {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+
+            .nav-panel.shrink .item-btn {
+                padding: 4px 10px;
+                font-size: 0.7rem;
+            }
+
+            .text-area {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            .axis-btn {
+                padding: 8px 12px;
+                font-size: 0.75rem;
+            }
+
+            .nav-panel.shrink .axis-btn {
+                padding: 4px 8px;
+                font-size: 0.65rem;
+            }
+
+            .slider-box {
+                height: 160px;
+            }
+
+            .text-area {
+                font-size: 0.85rem;
+            }
+
+            .text-area .stat-num {
+                font-size: 1rem;
+                padding: 0 8px;
+                min-width: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== الهيدر ===== -->
+    <header>
+        <h1>🏆 إنجازات تمكين · إقليم غزة</h1>
+        <div class="sub-title">استعراض شامل للإنجازات وفق التوثيق الرسمي</div>
+    </header>
+
+    <!-- ===== الحاوية الرئيسية ===== -->
+    <div class="main-wrapper">
+
+        <!-- ===== اللوحة العلوية (تبدأ كبيرة) ===== -->
+        <div class="nav-panel" id="navPanel">
+            <div class="axes-container">
+                <button class="axis-btn" onclick="openAxis(1, this)">
+                    <span class="icon">🎯</span><span>العنوان و الرؤية الاستراتيجية</span>
+                </button>
+                <button class="axis-btn" onclick="openAxis(2, this)">
+                    <span class="icon">📋</span><span>التخطيط العملياتي</span>
+                </button>
+                <button class="axis-btn" onclick="openAxis(3, this)">
+                    <span class="icon">📚</span><span>بناء القدرات و التدريب</span>
+                </button>
+                <button class="axis-btn" onclick="openAxis(4, this)">
+                    <span class="icon">🌐</span><span>المشاريع التجريبية و الميدانية</span>
+                </button>
+                <button class="axis-btn" onclick="openAxis(5, this)">
+                    <span class="icon">📊</span><span>التفاعل الرقمي والمؤشرات التشغيلية</span>
+                </button>
+            </div>
+
+            <!-- بنود المحور 1 -->
+            <div id="sub-1" class="sub-menu">
+                <button class="item-btn" onclick="showContent('champs', this)">⭐ الأبطال</button>
+                <button class="item-btn" onclick="showContent('facs', this)">👥 الميسرين</button>
+                <button class="item-btn" onclick="showContent('eie', this)">🏫 مجتمع EIE</button>
+            </div>
+
+            <!-- بنود المحور 2 -->
+            <div id="sub-2" class="sub-menu">
+                <button class="item-btn" onclick="showContent('concept', this)">📝 مذكرة مفاهيمية</button>
+                <button class="item-btn" onclick="showContent('logo', this)">🎨 الهوية البصرية</button>
+                <button class="item-btn" onclick="showContent('plan', this)">📊 خطة العمل الثلاثية</button>
+            </div>
+
+            <!-- بنود المحور 3 -->
+            <div id="sub-3" class="sub-menu">
+                <button class="item-btn" onclick="showContent('train', this)">🎓 تدريب الميسرين</button>
+                <button class="item-btn" onclick="showContent('managers', this)">🏛️ مدراء المناطق</button>
+                <button class="item-btn" onclick="showContent('special', this)">🧑‍🏫 المختصين التربويين</button>
+            </div>
+
+            <!-- بنود المحور 4 -->
+            <div id="sub-4" class="sub-menu">
+                <button class="item-btn" onclick="showContent('manage', this)">🏫 تدريب مديري المدارس</button>
+                <button class="item-btn" onclick="showContent('teacher', this)">👨‍🏫 تدريب المعلمين</button>
+                <button class="item-btn" onclick="showContent('session', this)">📋 الجلسات الميدانية</button>
+            </div>
+
+            <!-- بنود المحور 5 -->
+            <div id="sub-5" class="sub-menu">
+                <button class="item-btn" onclick="showContent('num', this)">📊 إحصاءات و أرقام</button>
+                <button class="item-btn" onclick="showContent('pod', this)">🎙️ البودكاست</button>
+                <button class="item-btn" onclick="showContent('one', this)">🤝 زوروني كل سنة مرة</button>
+                <button class="item-btn" onclick="showContent('challenge', this)">🏆 نتحدى لنتعلم</button>
+                <button class="item-btn" onclick="showContent('debate', this)">⚖️ مناظرة تربوية</button>
+            </div>
+        </div>
+
+        <!-- ===== قسم المحتوى والسلايدر ===== -->
+        <div id="contentSection" class="content-section">
+            <div class="text-area" id="descContent"></div>
+            <div class="slider-box" id="slider">
+                <!-- سيتم تعبئة الصور ديناميكياً عبر JavaScript -->
+                <div class="slider-dots" id="dotsContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== تعيين الصور لكل بند =====
+        // 🔴 قم بتغيير مسارات الصور حسب أسماء الملفات الموجودة لديك
+        const imageMap = {
+            // المحور 1: الرؤية الاستراتيجية
+'champs': ['champs1.jpg','champs2.jpeg'],
+'facs': ['facilitators1.jpeg','facilitators1.jpg', 'facilitators2.jpeg', 'facilitators3.jpg','facilitators4.jpg'],'eie': ['eie1.png'],
+            // المحور 2: التخطيط العملياتي
+'concept': ['concept1.png'],
+            'logo': ['logo1.jpg', 'logo2.jpg', 'logo3.jpg'],
+'plan': ['plan1.jpg', 'plan2.jpg', 'plan3.jpg','plan4.jpg','plan5.png'],
+            
+            // المحور 3: بناء القدرات
+'train': ['train1.png', 'train2.png', 'train3.png','train4.png'],
+'managers': ['managers1.jpeg'],
+'special': ['specialists1.png', 'specialists2.png', 'specialists3.png'],
+            
+            // المحور 4: المشاريع الميدانية
+'manage': ['principals1.jpeg'],
+            'teacher': ['teachers1.jpg', 'teachers2.jpg', 'teachers3.jpg'],
+            'session': ['sessions1.jpg', 'sessions2.jpg', 'sessions3.jpg'],
+            
+            // المحور 5: التفاعل الرقمي
+            'num': ['stats1.jpg', 'stats2.jpg', 'stats3.jpg'],
+'pod': ['podcast1.png'],
+            'one': ['visit1.jpg', 'visit2.jpg', 'visit3.jpg'],
+'challenge': ['challenge1.png', 'challenge2.png'],
+            'debate': ['debate1.jpg', 'debate2.jpg', 'debate3.jpg']
+        };
+
+        // ===== البيانات الكاملة للإنجازات =====
+        const achievements = {
+            // المحور 1: الرؤية الاستراتيجية
+            'champs': `
+                ✅ تم اختيار <span class="stat-num" data-val="17">0</span> 
+                <span class="highlight-primary">بطلاً (Champion)</span> من إقليم غزة ودمجهم في منصة تمكين
+                بقيادة focal point <span class="highlight-primary">أ.فضل السلول</span> و <span class="highlight-primary">أ.إياد النجار</span>.
+            `,
+            'facs': `
+                ✅ تم اختيار <span class="stat-num" data-val="6">0</span> 
+                <span class="highlight-primary">ميسرين جدد</span> من الرواد لدعم مجتمع تمكين غزة.
+            `,
+            'eie': `
+                ✅ بناء <span class="highlight-primary">مجتمع تمكين غزة - التعليم في حالات الطوارئ</span> (EIE) 
+                كطوق نجاة نفسي ومعيشي.
+            `,
+
+            // المحور 2: التخطيط العملياتي
+            'concept': `
+                ✅ <span class="highlight-primary">16 يونيو:</span>                 <br>
+صياغة المذكرة المفاهيمية المتكاملة 
+                التي شملت الرؤية والأهداف والنتائج المرجوة.
+            `,
+            'logo': `
+                ✅ تصميم <span class="highlight-primary">شعار خاص (Logo)</span>                 <br>
+يعكس الهوية البصرية 
+                لمجتمع EIE مع وصف مختصر له.
+            `,
+            'plan': `
+                ✅ عمل اجتماعات وجاهية مكثفة للميسريين مثل اجتماع KYTC
+                <br>
+                ✅ تطوير <span class="highlight-primary">خطة عمل شاملة لمدة 3 أشهر لمجتمع التعليم في حالات الطوارئ إقليم غزة</span>
+                وإرسالها لمكتب الرئاسة عمان <span class="highlight-accent">HQ</span> للاعتماد.
+            `,
+
+            // المحور 3: بناء القدرات
+            'train': `
+                ✅ <span class="highlight-primary">17-18 يونيو:</span> تدريب مكثف للميسرين حول فعالية المنصة 
+                وسبل التطوير.
+                <br>
+                ✅ <span class="highlight-primary">22-23 يونيو:</span> تطوير أداء الميسريين من خلال عقد اجتماعات مع الميسريين من الأقاليم الخمسة لمراجعة التحديات الميدانية وابتكار حلول تطويرية.
+            `,
+            'managers': `
+                ✅ <span class="highlight-primary">24 يونيو:</span> جلسة توعوية شاملة لمدراء المناطق التعليمية 
+                لتعزيز الوعي القيادي بمشاركة فريق الرئاسة العامة.
+            `,
+            'special': `
+                ✅ <span class="highlight-primary">30 يونيو – 2 يوليو:</span> برنامج تدريبي مكثف 
+                استهدف <span class="stat-num" data-val="3">0</span> مجموعات من المختصين التربويين لدمجهم في مجتمع تمكين بإدارة ميسري إقليم غزة.
+            `,
+
+            // المحور 4: المشاريع الميدانية
+            'manage': `
+                ✅ <span class="highlight-primary">6 يوليو:</span> انطلاق البرنامج التدريبي لمديري المدارس التجريبية الأربع للتعريف بالمبادرة والاتفاق على خطة تدريب المعلمين.
+            `,
+            'teacher': `
+                ✅ <span class="highlight-primary">11-16 يوليو:</span> بدء الجلسات التدريبية للمعلمين في المدارس لترجمة الرؤية الاستراتيجية إلى ممارسات صفية واقعية.
+            `,
+            'session': `
+                ✅ تخصيص <span class="highlight-primary">جلستين تدريبيتين</span> لكل مدرسة لضمان جودة استيعاب المعلمين للمنصة.
+            `,
+
+            // المحور 5: التفاعل الرقمي
+            'num': `
+                ✅ حقق رواد غزة 
+<span class="stat-num" data-val="78">0</span>
+                <span class="highlight-primary">تفاعلاً</span> و 
+<span class="stat-num" data-val="38">0</span>
+                <span class="highlight-primary">منشوراً</span> على منصات المجتمعات.
+            `,
+            'pod': `
+                ✅ <span class="highlight-primary">6 يونيو:</span> إطلاق بودكاست 
+                <span class="highlight-accent">"التعليم في الطوارئ"</span>                 <br>
+
+تم عمل بودكاست مع أ.سيف الدين المصري و أ.عبد الله أبو سعدة  بعنوان التعليم في الطوارئ ، لم يعد التعليم مجرد رفاهية أو كتب تُحفظ، بل يتحول إلى طوق نجاة نفسي ومعيشي لجيل كامل            `,
+            'one': `
+                ✅ <span class="highlight-primary">19 يونيو:</span> مبادرة 
+                <span class="highlight-accent">"زوروني كل سنة مرة"</span> 
+                بمشاركة إيمان الشياح.
+            `,
+            'challenge': `
+                ✅ مبادرة <span class="highlight-accent">"نتحدى لنتعلم"</span> 
+                لتعزيز روح التحدي والتعلم المستدام بين الرواد.
+            `,
+            'debate': `
+                ✅ <span class="highlight-primary">11 أبريل:</span> مناظرة تربوية حول 
+                <span class="highlight-accent">"التعلم المنضبط"</span> 
+                بمشاركة فاعلة من إقليم غزة.
+            `
+        };
+
+        // ===== وظائف التحكم =====
+
+        // فتح القائمة الفرعية
+        function openAxis(id, btn) {
+            document.querySelectorAll('.sub-menu').forEach(el => el.classList.remove('visible-flex'));
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('visible-grid'));
+
+            document.querySelectorAll('.axis-btn').forEach(b => b.classList.remove('active'));
+
+            const subMenu = document.getElementById('sub-' + id);
+            if (subMenu) subMenu.classList.add('visible-flex');
+            btn.classList.add('active');
+
+            document.querySelectorAll('.item-btn').forEach(b => b.classList.remove('active'));
+
+            const section = document.getElementById('contentSection');
+            if (!section.classList.contains('visible-grid')) {
+                document.getElementById('navPanel').classList.remove('shrink');
+            }
+        }
+
+        // عرض محتوى البند المحدد
+        function showContent(key, btn) {
+            const panel = document.getElementById('navPanel');
+            const section = document.getElementById('contentSection');
+            const textBox = document.getElementById('descContent');
+
+            document.querySelectorAll('.item-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            panel.classList.add('shrink');
+
+            textBox.innerHTML = achievements[key] || '⚠️ لا توجد معلومات متاحة لهذا البند.';
+            section.classList.add('visible-grid');
+
+            // تحديث صور السلايدر بناءً على المفتاح
+            updateSliderImages(key);
+
+            animateNumbers();
+            restartSlider();
+        }
+
+        // ===== تحديث صور السلايدر =====
+        function updateSliderImages(key) {
+            const sliderBox = document.getElementById('slider');
+            const images = imageMap[key] || ['default1.jpg', 'default2.jpg', 'default3.jpg'];
+            
+            // إزالة الصور القديمة (مع الاحتفاظ بمؤشرات التنقل)
+            const oldSlides = sliderBox.querySelectorAll('.slide');
+            oldSlides.forEach(s => s.remove());
+            
+            // إضافة الصور الجديدة
+            images.forEach((imgSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.className = 'slide' + (index === 0 ? ' active' : '');
+                img.alt = key + ' image ' + (index + 1);
+                sliderBox.appendChild(img);
+            });
+            
+            // إعادة تهيئة المؤشرات
+            initSlider();
+        }
+
+        // ===== العداد المتحرك =====
+        function animateNumbers() {
+            document.querySelectorAll('.stat-num').forEach(badge => {
+                const target = parseInt(badge.getAttribute('data-val'));
+                if (isNaN(target) || target === 0) {
+                    badge.innerText = target;
+                    return;
+                }
+
+                let count = 0;
+                const duration = 1000;
+                const steps = 35;
+                const increment = target / steps;
+                const intervalTime = duration / steps;
+
+                const timer = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        badge.innerText = target;
+                        clearInterval(timer);
+                    } else {
+                        badge.innerText = Math.floor(count);
+                    }
+                }, intervalTime);
+            });
+        }
+
+        // ===== السلايدر المتداخل =====
+
+        let slideTimer;
+        let currentSlide = 0;
+        let slides = [];
+        let dots = [];
+
+        function initSlider() {
+            const sliderBox = document.getElementById('slider');
+            slides = sliderBox.querySelectorAll('.slide');
+            const dotsContainer = document.getElementById('dotsContainer');
+            dotsContainer.innerHTML = '';
+            dots = [];
+
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (index === 0 ? ' active-dot' : '');
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+                dots.push(dot);
+            });
+            
+            currentSlide = 0;
+            if (slides.length > 0) {
+                slides.forEach(s => s.classList.remove('active'));
+                slides[0].classList.add('active');
+            }
+        }
+
+        function goToSlide(index) {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active-dot'));
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active-dot');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function restartSlider() {
+            clearInterval(slideTimer);
+            if (slides.length > 0) {
+                goToSlide(0);
+                slideTimer = setInterval(nextSlide, 3500);
+            }
+        }
+
+        // ===== التهيئة =====
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // تعيين صور افتراضية عند التحميل
+            updateSliderImages('champs');
+        });
+    </script>
+</body>
+</html>
