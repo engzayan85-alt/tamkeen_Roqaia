@@ -843,6 +843,10 @@ height: 500px;
                 const img = document.createElement('img');
                 img.src = imgSrc;
                 img.className = 'slide' + (index === 0 ? ' active' : '');
+				
+				img.style.objectFit = key === 'facs' ? 'contain' : 'cover';
+				
+				
                 img.alt = key + ' image ' + (index + 1);
                 sliderBox.appendChild(img);
             });
