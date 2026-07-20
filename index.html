@@ -562,12 +562,30 @@ background: #ffffff;
     }
 }
 
+
+
+#tooltip{
+    position: fixed;
+    display: none;
+    color: black;
+    font-size: 10px;
+    font-family: Cairo, sans-serif;
+    pointer-events: none;
+    z-index: 99999;
+	
+	
+	opacity: 0;
+transition: opacity 1.5s ease-in-out;	
+	
+}
+
+
 </style>
 		
 		
 		
 		
-    </style>
+   
 </head>
 <body>
 
@@ -959,5 +977,39 @@ background: #ffffff;
             updateSliderImages('champs');
         });
     </script>
+	
+	<div id="tooltip">رقية</div>
+
+<script>
+const tooltip = document.getElementById("tooltip");
+
+
+
+
+tooltip.style.opacity = "0";
+
+setInterval(() => {
+
+    tooltip.style.opacity = "1";   // تظهر
+
+    setTimeout(() => {
+        tooltip.style.opacity = "0";   // تختفي بعد ثانية
+    }, 1500);
+
+}, 8000);
+setInterval(() => {
+    visible = !visible;
+    tooltip.style.opacity = visible ? "1" : "0";
+}, 500);
+
+
+
+document.addEventListener("mousemove", function(e){
+    tooltip.style.display = "block";
+    tooltip.style.left = (e.clientX + 15) + "px";
+    tooltip.style.top = (e.clientY + 15) + "px";
+});
+</script>
+	
 </body>
 </html>
